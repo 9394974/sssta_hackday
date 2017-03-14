@@ -9,7 +9,7 @@ class Admin(db.Model):
 
     def __init__(self, name, password):
         self.name = name
-        self.ps = password
+        self.password = password
 
     def __repr__(self):
         return '<Admin %r>' % self.name
