@@ -23,7 +23,7 @@ class PhoneFormatValidators(object):
 
     def __call__(self, form, field):
         phone = field.data
-        if not phone.isdigit() and len(phone) != 11:
+        if not phone.isdigit() or len(phone) != 11:
             raise ValidationError(PHONE_FORMAT_ERROR)
 
 
