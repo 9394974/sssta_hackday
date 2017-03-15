@@ -19,7 +19,7 @@ def all_group_details():
 
 @index_api.route('/group/<int:group_id>', methods=['GET'])
 def group_details(group_id):
-    form = GroupCheckForm(MultiDict([('group_id', group_id), ]), csrf_enabled=False)
+    form = GroupCheckForm(MultiDict({'group_id': group_id}))
     if form.validate():
         data = get_one_group_information(form.group_id.data)
         return jsonify(response_dict(SUCCESS, data=data))
@@ -29,7 +29,7 @@ def group_details(group_id):
 
 @index_api.route('/group/participate', methods=['POST'])
 def group_participate():
-    form = GroupCreateForm(request.form, csrf_enabled=False)
+    form = GroupCreateForm(request.form)
     if form.validate():
         data = form.create_group()
         return jsonify(response_dict(SUCCESS, data=data))

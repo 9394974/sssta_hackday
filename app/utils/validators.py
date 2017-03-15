@@ -19,6 +19,20 @@ class FieldLengthValidators(object):
             raise ValidationError(self.message)
 
 
+class PositiveFieldValidators(object):
+
+    def __init__(self, message=None):
+        self.message = message
+
+    def __call__(self, form, field):
+        raw_integer = field.data
+        if raw_integer < 0:
+            if self.message is None:
+                self.message = "".join([field.short_name, "must be a positive integer."])
+
+            raise ValidationError(self.message)
+
+
 class PhoneFormatValidators(object):
 
     def __call__(self, form, field):
@@ -34,3 +48,4 @@ class GroupExistValidators(object):
         group = Group.query.get(group_id)
         if not group:
             raise ValidationError(GROUP_NOT_EXIST)
+

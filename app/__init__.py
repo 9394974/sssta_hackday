@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
-
-import os
+from flask_login import LoginManager
 
 
 db = SQLAlchemy()
+login_manager = LoginManager()
 
 
 def create_app(test=False):
@@ -16,7 +16,10 @@ def create_app(test=False):
     else:
         app.config.update(config)
 
+    app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
     db.init_app(app)
+    login_manager.init_app(app)
 
     from app.Admin import admin_api
     app.register_blueprint(admin_api)
@@ -24,4 +27,12 @@ def create_app(test=False):
     from app.Index import index_api
     app.register_blueprint(index_api)
 
+    from app.constants import USER_NOT_LOGIN
+    from app.utils.utils import response_dict
+
+    @app.errorhandler(401)
+    def user_not_login(e):
+        return jsonify(response_dict(USER_NOT_LOGIN))
+
     return app
+

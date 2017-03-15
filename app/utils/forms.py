@@ -19,4 +19,5 @@ class BaseForm(Form):
                 elif isinstance(error, str):
                     return response_dict(PARM_FORMAT_ERROR, message=error)
 
-
+    class Meta:
+        csrf = False
