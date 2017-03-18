@@ -37,7 +37,8 @@ def create_app(test=False):
     # account for test
     from app.Models import Admin
     with app.app_context():
-        if Admin.query.filter_by(name='sssta_admin').first() is None:
+        db.create_all()
+		if Admin.query.filter_by(name='sssta_admin').first() is None:
             admin = Admin(name='sssta_admin', password='2333')
             db.session.add(admin)
             db.session.commit()
