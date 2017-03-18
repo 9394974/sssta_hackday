@@ -39,7 +39,7 @@
    - email string
    - phone string   
    
-# POST /api/group/parcitipate 提交队伍信息
+# POST /api/group/participate 提交队伍信息
 ---
 ## request
 

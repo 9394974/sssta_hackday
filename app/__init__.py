@@ -22,10 +22,10 @@ def create_app(test=False):
     login_manager.init_app(app)
 
     from app.Admin import admin_api
-    app.register_blueprint(admin_api)
+    app.register_blueprint(admin_api, url_prefix='/api')
 
     from app.Index import index_api
-    app.register_blueprint(index_api)
+    app.register_blueprint(index_api, url_prefix='/api')
 
     from app.constants import USER_NOT_LOGIN
     from app.utils.utils import response_dict
@@ -33,6 +33,14 @@ def create_app(test=False):
     @app.errorhandler(401)
     def user_not_login(e):
         return jsonify(response_dict(USER_NOT_LOGIN))
+
+    # account for test
+    from app.Models import Admin
+    with app.app_context():
+        if Admin.query.filter_by(name='sssta_admin').first() is None:
+            admin = Admin(name='sssta_admin', password='2333')
+            db.session.add(admin)
+            db.session.commit()
 
     return app
 

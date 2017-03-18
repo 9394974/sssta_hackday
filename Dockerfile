@@ -1,15 +1,17 @@
-FROM python:3
+FROM daocloud.io/python:3-onbuild
 
-MAINTAINER Qinka <qinka@live.com>
+MAINTAINER sssta_hackday "crazy_leaves@outlook.com"
 
-RUN mkdir -p /app
+RUN mkdir -p /sssta_hackday
 
-COPY requestments.txt /app/requestments
+WORKDIR /sssta_hackday
 
-RUN pip3 install -r /app/requestments
-RUN apt install libsqlite3-0
+COPY . /sssta_hackday
 
-COPY . /app/
+RUN apt-get update && apt-get install sqlite3
+
+RUN pip3 install -r requirements.txt
 
 EXPOSE 15000
-CMD python3 /app/manage.py
+
+CMD python3 manage.py
