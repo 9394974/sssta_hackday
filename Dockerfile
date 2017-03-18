@@ -10,7 +10,7 @@ COPY . /sssta_hackday
 
 RUN apt-get update && apt-get install sqlite3
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txt -i http://pypi.douban.com/simple
 
 EXPOSE 15000
 
