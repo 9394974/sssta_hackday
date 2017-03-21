@@ -20,7 +20,7 @@
 - data
 - message
 
-# POST /api/<group_id>/points 提交队伍分数
+# POST /api/`<group_id>`/points 提交队伍分数
 ---
 
 ## request
@@ -34,7 +34,7 @@
 - message
 
 
-# DELETE /api/<group_id>/delete 删除队伍
+# DELETE /api/group/`<group_id>` 删除队伍
 ---
 
 ## request
