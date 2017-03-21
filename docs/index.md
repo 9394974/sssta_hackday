@@ -7,7 +7,7 @@
 - data list 
    - group_id int
    - points int 
-   - name int（队员名字）
+   - name string（队员名字）
    - college int 
      - 0 软院
      - 1 计院
