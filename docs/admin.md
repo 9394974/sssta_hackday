@@ -34,6 +34,7 @@
 - message
 
 
+<<<<<<< HEAD
 # DELETE /api/group/`<group_id>` 删除队伍
 ---
 
