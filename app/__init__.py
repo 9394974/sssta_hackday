@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_cors import CORS
 
 
 db = SQLAlchemy()
@@ -20,6 +21,7 @@ def create_app(test=False):
 
     db.init_app(app)
     login_manager.init_app(app)
+    CORS(app)
 
     from app.Admin import admin_api
     app.register_blueprint(admin_api, url_prefix='/api')
